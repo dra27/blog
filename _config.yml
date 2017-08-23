@@ -1,0 +1,14 @@
+title: Notes from the Windows corner
+email: David.Allsopp@cl.cam.ac.uk
+description: > # this means to ignore newlines until "baseurl:"
+  David Allsopp’s OCaml Labs blog featuring musings on OCaml, Windows and
+  other vaguely related things.
+baseurl: ""
+url: ""
+github_username: dra27
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed

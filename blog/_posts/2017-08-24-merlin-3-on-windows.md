@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Merlin 3 on Windows"
+categories: platform
+tags: "ocaml merlin windows porting"
+---
+[Merlin 3.0.0](http://opam.ocaml.org/packages/merlin/merlin.3.0.0/) was released a month ago. I've previously contributed patches for [native Windows support](https://github.com/ocaml/merlin/pull/409), and Frédéric Bour had been in touch with me during the development of Merlin 3 to try to ensure that decisions taken wouldn't cause too much of a headache for the Windows build.
+
+Merlin 3's big feature at the moment is OCaml 4.05 support, but under the hood it's also a refactoring with the twin goals of improved performance and maintainability. Exciting new features wait around the corner once the new release has settled. 3.0.1 and 3.0.2 have followed fairly swiftly. Windows support is merged and will be available in 3.0.3; it was added in three pull requests: [PR#677](https://github.com/ocaml/merlin/pull/677), [PR#682](https://github.com/ocaml/merlin/pull/682) and [PR#684](https://github.com/ocaml/merlin/pull/684).
+
+Each of those PRs highlights a different area of the entertaining time one has maintaining codebases intended for both Windows and Unix systems.
+
+##  The dreaded `\r` [PR#682](https://github.com/ocaml/merlin/pull/682)
+
+Back in February, after some discussion, the Cygwin team altered the behaviour of the sed, grep and awk packages to preserve `\r` characters in file streams from binary mounts (the most common binary mount in Cygwin is `/cygdrive` which is where you can access the computer's drives). Previously, these tools automatically converted the Windows line ending `\r\n` to a Unix one, which was usually what you wanted for shell programming, but not necessarily for some file processing (it also wasn't Posix-compatible).
+
+For OCaml developers, this manifests itself in two ways:
+
+1. Git checkouts on Windows normally convert sources to Windows line endings (see the `core.autocrlf` setting and `.gitattributes` file if you've never come across this before). You can cheat, and force Git to use Unix line endings everywhere, but I personally find that a somewhat authoritarian approach to cross-platform writing!
+2. The output of OCaml tools will usually have Windows line endings (e.g. `ocamlc -config` or `ocamlfind printconf`) and where before an assignment like `OS_TYPE=$(ocamlc -config | sed -ne 's/os_type: //p'` could be used to get OCaml's configured os_type value, now that runs a risk of having a stray `\r` character at the end which can obvious mess up messages, config files and string comparisons.
+
+The solution is that various commands must be piped through `tr -d '\015'` (other incantations are available). The problem is compounded by its only affecting more recent Cygwin installs - developers often don't update Cygwin very often (it's typically only installed to provide a build system) and so this ends up being something that bites new users or unexpectly afflicts people setting up new machines.
+
+##  Shell and filename weirdness ([PR#677](https://github.com/ocaml/merlin/pull/677))
+
+There are various important architectural differences between how the Windows kernel (or, more specifically, the Win32 Sub-system) and a Unix kernel handle processes: `CreateProcess` vs `fork`/`exec` being one. Under Unix, the normal expectation is that the user's shell is responsible for any filename globbing, thus when running `ls *.txt` the `ls` command expects the shell to expand `*.txt` to the names of each file matching that pattern and pass them on the command line. The Windows Command Processor (`cmd.exe`) does not do this, although confusingly the Microsoft C runtime can be [tweaked to do this](https://docs.microsoft.com/en-gb/cpp/c-language/expanding-wildcard-arguments).
+
+As a result, cross-platform software often has to implement "file gobbing" operations for Windows ports itself, or else rely on a library which provides it - for example, Cygwin, which performs this when Cygwin executables are called from a non-Cygwin process unless its [`noglob` option](https://cygwin.com/cygwin-ug-net/using-cygwinenv.html) is set. This globbing operation in Vim when running on Windows was causing a quite hard-to-trace error in Merlin's type throwback command `:MerlinTypeOf` (which in Vim is usually accessed by typing `\t`). Merlin 2.0 introduced coloured type information in the Vim bindings, but plugging the OCaml syntax highlighting and Vim's status bar together involves a slightly ugly hack. Merlin must create a hidden screen buffer to perform the rendering of the type and can then copy this highlighted type to the status bar (in full technicolor). The name chosen for this hidden buffer was `*merlin-type-history*` (an, ahem, somewhat emacs-like name to choose). Unfortunately, Vim on Windows sees the asterisk in this command and immediately invokes its custom filename globber, fails to find any files matching that name (well, hopefully!) and displays a slightly awkward screen of error messages. The "fix" for this, it turns out, was simply to change the asterisks - I chose the `:` character which has the added bonus of creating an illegal filename (Vim won't notice this, as the buffer is never written). The joys of Windows...
+
+## Inter-process Communication and C compatibility ([PR#684](https://github.com/ocaml/merlin/pull/684))
+
+Prior to Merlin 3, whenever your editor needed some information from Merlin, it would start the ocamlmerlin process, passing a query on the command line and then parse JSON output from stdout. This was fine as long as the queries were fast, but it meant that Merlin would repeat lots of processing in a typical editing session. Merlin 3 switches to a client/server architecture where the ocamlmerlin process is now a super-lean C program and the first invocation daemonises a separate server process. The client connects to a Unix socket set-up by the server process and sends file descriptors for stdin, stdout and stderr. The server process is then able to communicate directly with the editor for the query. The small process then terminates.
+
+Although Windows implements Internet sockets, there is no equivalent for Unix sockets. However, Windows does provide [Named Pipes](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365590.aspx), which serve a very similar purpose. Windows doesn't let you just pass handle values around without some extra incantations and stumbling blocks. It is possible to send your process's stdin, stdout and stderr to another process, but first you must yourself obtain a handle to that process (see [`OpenProcess`](https://msdn.microsoft.com/en-gb/library/windows/desktop/ms684320.aspx)) - oh, but did I mention that you need to find out the ID of the process at the other end of the pipe (see [`GetNamedPipeServerProcessId`](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365446.aspx), a function only added in Windows Vista, even though Named Pipes are an original Windows NT feature). Armed with that process, you can create copies of your standard handles in the server processes object table (see [`DuplicateHandle`](https://msdn.microsoft.com/en-us/library/windows/desktop/ms724251.aspx)). Oh, but you then need to communicate those handle values to the server process via the named pipe. Oh, and while you can duplicate almost any handle, you can't duplicate a handle to a Console, so when doing this all the standard handles must be redirected to files, or it'll all come crashing down.
+
+## Next up...
+
+So, Merlin 3 now being available on your Windows system, next up I'll have a look at using AppVeyor for Windows CI, which was also included in the Merlin PR.

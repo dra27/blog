@@ -10,7 +10,7 @@ Merlin 3's big feature at the moment is OCaml 4.05 support, but under the hood i
 
 Each of those PRs highlights a different area of the entertaining time one has maintaining codebases intended for both Windows and Unix systems.
 
-##  The dreaded `\r` [PR#682](https://github.com/ocaml/merlin/pull/682)
+##  The dreaded \r [PR#682](https://github.com/ocaml/merlin/pull/682)
 
 Back in February, after some discussion, the Cygwin team altered the behaviour of the sed, grep and awk packages to preserve `\r` characters in file streams from binary mounts (the most common binary mount in Cygwin is `/cygdrive` which is where you can access the computer's drives). Previously, these tools automatically converted the Windows line ending `\r\n` to a Unix one, which was usually what you wanted for shell programming, but not necessarily for some file processing (it also wasn't Posix-compatible).
 

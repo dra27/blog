@@ -22,7 +22,7 @@ Then it's as simple as toggling the switch next to your OCaml fork and you're do
 
 ![Travis Empty Build History]({{ site.url }}/assets/2017-09-27/2017-09-27-ocaml-github-ci-2.png)
 
-but once your start pushing your new topic branches:
+but once you start pushing your new topic branches:
 
 ![Travis Building]({{ site.url }}/assets/2017-09-27/2017-09-27-ocaml-github-ci-3.png)
 

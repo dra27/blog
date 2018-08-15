@@ -2,9 +2,10 @@
 layout: post
 title: "Urgent problem with camlp5 7.03 and macOS OCaml 4.06.1"
 categories: platform
-draft: true
 tags: "ocaml opam"
 ---
+_This was originally on the posted on the [OCaml Platform Blog](https://opam.ocaml.org/blog/camlp5-system/)._
+
 # Packaging problem with opam-repository camlp5 7.03 when upgrading to OCaml 4.06.1
 
 Between 26 Oct 2017 and 17 Feb 2018, the OPAM package for camlp5 7.03 in [opam-repository](https://github.com/ocaml/opam-repository) was under certain circumstances able to trigger `rm -rf /` on macOS and other systems which don't by default prevent recursive root deletion. This article contains advice on how to identify if your OPAM installation is affected and what you can do to fix it.
@@ -97,4 +98,4 @@ If the system compiler alters, OPAM 1.2.2 on virtually all commands (including `
 
 ## Future mitigation
 
-Owing to the changes made to how opam 2 processes package installations, opam 2 has been unaffected by this situation but opam 2's lead developer [@AltGr](https://github.com/AltGr) freely admits that this is more by luck than judgement. However, the second release candidate for opam 2 includes mandatory support for sandboxing on Linux, and support for sandboxing on macOS will be ready before opam 2's final release. Sandboxing package building and installation will protect opam 2 against future issues of this kind, as a malfunctioning build system will be unable to operate on files outside its build directory or, during installation, switch root.
+Owing to the changes made to how opam 2 processes package installations, opam 2 has been unaffected by this situation but opam 2's lead developer [@AltGr](https://github.com/AltGr) freely admits that this is more by luck than judgement. However, the second release candidate for opam 2 includes mandatory support for sandboxing on Linux and macOS. Sandboxing package building and installation will protect opam 2 against future issues of this kind, as a malfunctioning build system will be unable to operate on files outside its build directory or, during installation, switch root.

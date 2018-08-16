@@ -3,7 +3,6 @@ layout: post
 title: "The joys of Dune vendoring"
 categories: platform
 tags: "ocaml dune mirage"
-draft: true
 ---
 Of the many wonderful features provided by [Dune](https://github.com/ocaml/dune), my personal favourite remains its composability. It doesn't gain much mention in the manual because, well, there's not *that* much to explain about it beyond the simple fact that if you put separate Dune projects in subdirectories underneath your current project, then Dune will use those projects in preference to opam-installed libraries. This allows for a far superior workflow to developing using opam pins, as can be seen from my own recent addition of features to Mirage's [logs-syslog](https://github.com/hannesm/logs-syslog) library, which also required an addition to one of its dependencies, [syslog-message](https://github.com/verbosemode/syslog-message). Neither of these libraries are presently built using Dune, however porting [them](https://github.com/dra27/logs-syslog/tree/dune) [both](https://github.com/dra27/syslog-message/tree/dune) was not particularly difficult, and I thought it would be interesting to show how much more efficient the process of developing my recent patches would have been with Dune, rather than with `opam pin`.
 

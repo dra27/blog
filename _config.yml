@@ -4,7 +4,7 @@ description: > # this means to ignore newlines until "baseurl:"
   David Allsopp’s OCaml Labs blog featuring musings on OCaml, Windows and
   other vaguely related things.
 baseurl: ""
-url: ""
+url: "https://www.dra27.uk"
 github_username: dra27
 
 # Build settings

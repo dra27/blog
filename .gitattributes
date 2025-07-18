@@ -1,2 +1,4 @@
 # Default behaviour, for if core.autocrlf isn't set
 * text=auto
+
+*.mp3 binary

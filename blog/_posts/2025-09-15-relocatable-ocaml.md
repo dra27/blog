@@ -4,7 +4,7 @@ title: "Relocatable OCaml - from concept to demo to PRs"
 categories: platform
 tags: "ocaml windows"
 ---
-If you give vapourware long enough, it condenses into an actual ware! An idea hatched between rehearsing Handel arias in the outskirts of Munich just over six years ago to make running OCaml's programs a little less surprising is now [132 commits of reality](https://github.com/dra27/ocaml/pull/236/commits).
+If you give vapourware long enough, it condenses into an actual ware! An idea hatched between rehearsing Handel arias in the outskirts of Munich just over six years ago to make running OCaml's programs a little less surprising is now [132 commits of reality](https://github.com/ocaml/ocaml/pull/14247).
 
 Relocatable OCaml started out as a solution to a few thorny problems with the darker corners of OCaml. The somewhat grander fast opam switches [referred to in the eventual RFC](https://github.com/ocaml/RFCs/pull/53) followed later.
 

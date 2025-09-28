@@ -5,12 +5,12 @@ categories: platform
 tags: "ocaml llm agentic"
 ---
 
-Continuing the [previous theme](({% post_url 2025-09-17-late-to-the-party %}))
+Continuing the [previous theme]({% post_url 2025-09-17-late-to-the-party %})
 of dabbling with matters agentic. Previously, I'd quite assiduously kept my
 fingers away from files. This time, I wanted to try something exploratory,
 switching to the agent for things I was actively stuck on.
 
-I was still (very) curious at the latent remaining bug in [Lucas's excellent work](({% post_url 2025-09-25-building-with-effects %})).
+I was still (very) curious at the latent remaining bug in [Lucas's excellent work]({% post_url 2025-09-25-building-with-effects %}).
 There were some corners which had been cut in the prototype, and I had a brief
 foray into this problem, with a view this time to ensuring artefact equivalence
 between what OCaml's build system would produce and what our altered driver

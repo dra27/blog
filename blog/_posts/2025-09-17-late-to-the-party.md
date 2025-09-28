@@ -5,7 +5,7 @@ categories: platform
 tags: "ocaml llm agentic"
 ---
 I've been largely steering clear of the AI bandwagon up to now, mainly because
-the last thing I needed while working on [Relocatable OCaml](({% post_url 2025-09-15-relocatable-ocaml %}))
+the last thing I needed while working on [Relocatable OCaml]({% post_url 2025-09-15-relocatable-ocaml %})
 was to be trying to learn a new tool at the same time as finishing something
 which felt desperately late and which, at times, I myself didn't fully
 understand! However, as the buzz of [the announcement](https://discuss.ocaml.org/t/relocatable-ocaml/17253)

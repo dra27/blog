@@ -1,8 +1,9 @@
 title: Notes from the Windows corner
 email: David.Allsopp@cl.cam.ac.uk
 description: > # this means to ignore newlines until "baseurl:"
-  David Allsopp’s EEG blog featuring musings on OCaml, Windows and
-  other vaguely related things.
+  David Allsopp’s blog featuring musings on O(x)Caml, Windows and
+  other vaguely-related things. Views expressed are my own, rather
+  than my employer’s.
 baseurl: ""
 url: "https://www.dra27.uk"
 github_username: dra27

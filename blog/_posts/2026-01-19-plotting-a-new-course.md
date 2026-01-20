@@ -4,21 +4,21 @@ title: "open Core"
 categories: platform
 tags: "ocaml oxcaml"
 ---
-On 16 December 2000, a young @dra (the “27” wouldn’t be allocated until the next
-October) stepped out on to the stage of [St Martin-in-the-Fields](https://www.stmartin-in-the-fields.org/)
+On 16 December 2000, a young @dra[^1] stepped out on to the stage of [St Martin-in-the-Fields](https://www.stmartin-in-the-fields.org/)
 making what would be the first of many performances of Johann Sebastian Bach’s
 great [Mass in B minor](https://en.wikipedia.org/wiki/Mass_in_B_minor). On 16
 November last year, just under 25 years later, a slightly greyer @dra27 stepped
 out on the stage of [King’s Hall](https://www.newcastlebachchoir.org.uk/dbpage.php?pg=view&dbase=events&id=202182)
-at Newcastle University for what, for now at least[^1], would be his last
-performance of this great work[^2]. As I write this in the 9 hour window of
+at Newcastle University for what, for now at least[^2], would be his last
+performance of this great work[^3]. As I write this in the 9 hour window of
 unemployment between finishing at the [University of Cambridge](https://www.cam.ac.uk)
 and [Tarides](https://tarides.com) and commuting down to 2½ Devonshire Square to
 start at [Jane Street](https://www.janestreet.com), it’s a new year and a change
 of course.
 
-[^1]: never say never…
-[^2]: I’ve never recorded the work, although I recorded [Ach, bleibe doch](https://open.spotify.com/track/7kZypUPNwPu0JKCCbD57X2) from [Himmelfahrtsoratorium BWV 11](https://en.wikipedia.org/wiki/Lobet_Gott_in_seinen_Reichen,_BWV_11#4) with [Musik Podium Stuttgart](https://musikpodium.de) ten years ago, which is one of the source arias for the famous _Agnus Dei_ of the mass
+[^1]: the “27” wouldn’t be allocated until the next October
+[^2]: never say never…
+[^3]: I’ve never recorded the work, although I recorded [Ach, bleibe doch](https://open.spotify.com/track/7kZypUPNwPu0JKCCbD57X2) from [Himmelfahrtsoratorium BWV 11](https://en.wikipedia.org/wiki/Lobet_Gott_in_seinen_Reichen,_BWV_11#4) with [Musik Podium Stuttgart](https://musikpodium.de) ten years ago, which is one of the source arias for the famous _Agnus Dei_ of the mass
 
 My professional life to now has always been a balancing act between the arts and
 technology (perhaps a rollercoaster would be a better analogy; balancing act
@@ -44,7 +44,7 @@ But for me the art _is_ made to be seen. During the COVID-19 pandemic, when live
 performance became impossible, I remember spending many months at home unable,
 or at least unwilling, to sing. Without even the [colleagues to perform with](https://open.spotify.com/track/6nQeKKpvUFJE0S6gwem2JN),
 let alone the audience to consume the result, there was no purpose. And so too
-the perfect software is without purpose without users[^3]. In championing and
+the perfect software is without purpose without users[^4]. In championing and
 furthering Windows OCaml, I chose the niche of a niche, but I am hugely proud
 that today _every_ Windows user of OCaml benefits (hopefully!) from the work I
 [both](https://github.com/ocaml-multicore/ocaml-multicore/pull/351) [did](https://github.com/ocaml/ocaml/pull/11642),
@@ -54,7 +54,7 @@ journey in OCaml following my vision of how [it should work](https://github.com/
 thanks to the seemingly boundless patience and efforts of my opam
 co-maintainers!
 
-[^3]: Perhaps I should adopt _sine usoribus sine proposito_ as motto
+[^4]: Perhaps I should adopt _sine usoribus sine proposito_ as a motto
 
 Behind all this, though, are the companies which allowed this to happen: first
 at OCaml Labs at the University of Cambridge and then spinning out into Tarides.

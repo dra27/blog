@@ -120,8 +120,8 @@ containers to force them to be built. [It worked really nicely](https://github.c
 the testing identified a few slips here and there with the commit series, and it
 was very efficient to re-test it after any tweaks.
 
-So... having got that working, I wanted to make sure that changes I'd made to
-the [monster script](https://github.com/dra27/relocatable/commits/main/stack)
+<span id="stack">So... having got that working</span>, I wanted to make sure
+that changes I'd made to the [monster script](https://github.com/dra27/relocatable/commits/main/stack)
 that reconstitutes Relocatable OCaml back at the beginning of the month were
 working on all of the older lock files. Partly because things should be _always_
 be reproducible, but also because I have needed to go back to older iterations
